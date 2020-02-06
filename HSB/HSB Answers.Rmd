@@ -1,0 +1,14 @@
+#Run the following code to import the hsb data set from the "faraway" library. 
+
+library(faraway) 
+data(hsb) 
+
+#Build a linear regression model for the response variable "science". Use all the other variables in the dataset as independent variables. 
+
+str(hsb)
+g1 <- lm(science~gender +race+ses+schtyp+prog+
+          read+write+socst, data=hsb)
+
+#You can also use the following one for all the variables
+# g1 <- lm(science~., data=hsb) 
+summary(g1)

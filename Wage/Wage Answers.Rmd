@@ -1,0 +1,9 @@
+#Run the following code to import the Wage data set from the "ISLR" library. 
+> library(ISLR ) 
+> data( Wage) 
+ 
+#Explore the variables of the dataset using str()or with ?Wage. Build a regression model where wage is the dependent variable and age, job class (which has 1 for Industrial and 2 for Information) and education are the independent variable. How can we interpret the slope of age? Keep in mind that this definition will be slightly different then the previous ones as we have multiple variables in the model. 
+
+data(rmse(predicted.cat$error))
+str(Wage)
+lm(wage~age+education+jobclass, data=Wage)

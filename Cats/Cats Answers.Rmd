@@ -1,0 +1,93 @@
+#Cats Run the following code to import the cats data set from the "MASS" library. 
+
+> library( MASS)
+> data(cats) 
+ 
+#The data set includes 3 variables: Sex, Body weight (kg) and heart weight (g). These variable can be found with the str() function. 
+
+#Create a linear model where heart weight is the dependent variable and body weight is the independent variable. 
+
+library(MASS)
+data(cats)
+str(cats)
+model<- lm(Hwt~Bwt, data=cats)
+
+#What is the intercept and the slope of this model? How can you interpret the slope of this model?  
+
+max(cats$Bwt)
+
+#prediction for cat model for Hwt of a cat with Bwt = 6.5
+summary(model)
+# Based on the following newHwt = -0.3567 + newBwt * 4.0341 
+#Estimate Std. Error t value Pr(>|t|)
+#(Intercept)  -0.3567     0.6923  -0.515    0.607
+#Bwt           4.0341     0.2503  16.119   <2e-16
+newBwt = 6.5
+newHwt = -0.3567 + newBwt * 4.0341
+
+#or use predict function as follows
+new.df <- data.frame(Bwt=c(6.5))
+predict(model, new.df)
+
+#Let's take a look at the error
+bwt.df <- data.frame(Bwt= cats$Bwt)
+predict.bwt <- data.frame(predict = predict(model,bwt.df))
+predicted.cat <- cbind(cats,predict.bwt)
+error.df <- data.frame(error=(predicted.cat$Hwt-predicted.cat$predict))
+predicted.cat <- cbind(predicted.cat, error.df)
+summary(predicted.cat$error)
+summary(model)
+boxplot(predicted.cat$error)
+error.pdf <- data.frame(percent_error=(100*abs(predicted.cat$error)/predicted.cat$Hwt))
+predicted.cat <- cbind(predicted.cat, error.pdf)
+
+max(cats$Bwt)
+
+#prediction for cat model for Hwt of a cat with Bwt = 6.5
+summary(model)
+# Based on the following newHwt = -0.3567 + newBwt * 4.0341 
+#Estimate Std. Error t value Pr(>|t|)
+#(Intercept)  -0.3567     0.6923  -0.515    0.607
+#Bwt           4.0341     0.2503  16.119   <2e-16
+newBwt = 6.5
+newHwt = -0.3567 + newBwt * 4.0341
+
+#or use predict function as follows
+new.df <- data.frame(Bwt=c(6.5))
+predict(model, new.df)
+
+#Let's take a look at the error
+bwt.df <- data.frame(Bwt= cats$Bwt)
+predict.bwt <- data.frame(predict = predict(model,bwt.df))
+predicted.cat <- cbind(cats,predict.bwt)
+error.df <- data.frame(error=(predicted.cat$Hwt-predicted.cat$predict))
+predicted.cat <- cbind(predicted.cat, error.df)
+summary(predicted.cat$error)
+summary(model)
+boxplot(predicted.cat$error)
+error.pdf <- data.frame(percent_error=(100*abs(predicted.cat$error)/predicted.cat$Hwt))
+predicted.cat <- cbind(predicted.cat, error.pdf)
+
+#Now draw a scatter plot with this data and insert this linear model into it. (Hint: abli ne()). Try to distinguish the sex of the cats in the scatter plot by using the poi nts() function. 
+plot(cats$Bwt, cats$Hwt, las=1, type="n",xlim = c(0,5), ylim =c(-2,10))
+abline(model)# drawing the regression line
+with(cats, points(Bwt[Sex=="F"], Hwt[Sex=="F"], pch=16, col="red"))
+with(cats, points(Bwt[Sex=="M"], Hwt[Sex=="M"], pch=17, col="blue"))
+
+#Predict the heart weight of a cat that is 3.5 kilograms. Can you accurately predict the heart weight of a cat that is 6.5 kilograms?
+
+#or use predict function as follows
+new.df <- data.frame(Bwt=c(6.5))
+predict(model, new.df)
+
+#Let's take a look at the error
+bwt.df <- data.frame(Bwt= cats$Bwt)
+predict.bwt <- data.frame(predict = predict(model,bwt.df))
+predicted.cat <- cbind(cats,predict.bwt)
+error.df <- data.frame(error=(predicted.cat$Hwt-predicted.cat$predict))
+predicted.cat <- cbind(predicted.cat, error.df)
+summary(predicted.cat$error)
+summary(model)
+boxplot(predicted.cat$error)
+error.pdf <- data.frame(percent_error=(100*abs(predicted.cat$error)/predicted.cat$Hwt))
+predicted.cat <- cbind(predicted.cat, error.pdf)

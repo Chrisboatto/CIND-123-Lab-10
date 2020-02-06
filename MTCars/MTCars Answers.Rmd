@@ -1,0 +1,8 @@
+#First, model the mpg variable on hp and then model the mpg variable on wt. Check the summary commend for both of the models. 
+
+data(mtcars)
+str(mtcars)
+model1 <- lm(mpg ~ hp, data=mtcars)
+summary(model1)
+model2 <- lm(mpg~wt, data=mtcars)
+summary(model2)
